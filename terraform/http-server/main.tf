@@ -13,6 +13,11 @@ resource "aws_ecs_task_definition" "http_server" {
     "image": "chrisduong/http-server:${var.app_version}",
     "cpu": 0,
     "memory": 128,
+    portMappings = [
+      {
+        containerPort = 8080
+      }
+    ]
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {

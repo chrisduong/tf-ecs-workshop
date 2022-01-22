@@ -34,7 +34,27 @@ docker run --rm -it -p 8080:8080  http-server:0.1.0
 **Requirements**:
 
 - Terraform version `> 1.0'.
-- Community Terraform module [aws-ecs](https://registry.terraform.io/modules/terraform-aws-modules/ecs/aws/latest)
+- Community Terraform modules:
+  - [aws-ecs](https://registry.terraform.io/modules/terraform-aws-modules/ecs/aws/latest)
+  - [aws-alb](https://registry.terraform.io/modules/terraform-aws-modules/alb/aws/latest)
+
+### Create the DNS first
+
+Register a domain (dev):
+
+```sh
+aws route53domains register-domain \
+  --cli-input-json file://deploy/http-server-example-dev.engineering.json \
+  --region us-east-1
+
+# {
+#     "OperationId": "8753d80b-36a9-4a0c-9b94-281263c802de"
+# }
+```
+
+```sh
+terraform apply -target="module.zones" -auto-approve
+```
 
 ### Deployment in ECS
 

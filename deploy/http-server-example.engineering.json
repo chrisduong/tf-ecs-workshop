@@ -1,0 +1,47 @@
+{
+  "DomainName": "http-server-example.engineering",
+  "DurationInYears": 1,
+  "AutoRenew": true,
+  "AdminContact": {
+      "FirstName": "Martha",
+      "LastName": "Rivera",
+      "ContactType": "PERSON",
+      "OrganizationName": "Example",
+      "AddressLine1": "1 Main Street",
+      "City": "Anytown",
+      "State": "WA",
+      "CountryCode": "US",
+      "ZipCode": "98101",
+      "PhoneNumber": "+1.8005551212",
+      "Email": "bixu_bot@icloud.com"
+  },
+  "RegistrantContact": {
+      "FirstName": "Li",
+      "LastName": "Juan",
+      "ContactType": "PERSON",
+      "OrganizationName": "Example",
+      "AddressLine1": "1 Main Street",
+      "City": "Anytown",
+      "State": "WA",
+      "CountryCode": "US",
+      "ZipCode": "98101",
+      "PhoneNumber": "+1.8005551212",
+      "Email": "bixu_bot@icloud.com"
+  },
+  "TechContact": {
+      "FirstName": "Mateo",
+      "LastName": "Jackson",
+      "ContactType": "PERSON",
+      "OrganizationName": "Example",
+      "AddressLine1": "1 Main Street",
+      "City": "Anytown",
+      "State": "WA",
+      "CountryCode": "US",
+      "ZipCode": "98101",
+      "PhoneNumber": "+1.8005551212",
+      "Email": "bixu_bot@icloud.com"
+  },
+  "PrivacyProtectAdminContact": true,
+  "PrivacyProtectRegistrantContact": true,
+  "PrivacyProtectTechContact": true
+}
