@@ -10,6 +10,7 @@
 ### Requirements
 
 - Terraform version `> 1.0'.
+- Community Terraform module [aws-ecs](https://registry.terraform.io/modules/terraform-aws-modules/ecs/aws/latest)
 
 ### 1. Create the ECS cluster
 
