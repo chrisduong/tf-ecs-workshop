@@ -2,16 +2,42 @@
 
 ## Setup
 
+- Build the simple golang HTTP server which return its version.
 - Create the ECS cluster.
 - Deploy the backend service in ECS.
 
-## Installations
+## Develop the HTTP server
 
-### Requirements
+**Requirements:**
+
+- Docker.
+- Go version ">= 1.12".
+
+### Build the Docker image
+
+About Versioning: we will have a Git tag for each release.
+
+For e.g. to build the version `v0.1.0`:
+
+```sh
+VERSION=v0.1.0 make build
+```
+
+Run the docker image locally:
+
+```sh
+docker run --rm -it -p 8080:8080  http-server:0.1.0
+```
+
+## Setup the Infra
+
+**Requirements**:
 
 - Terraform version `> 1.0'.
 - Community Terraform module [aws-ecs](https://registry.terraform.io/modules/terraform-aws-modules/ecs/aws/latest)
 
-### 1. Create the ECS cluster
+### Create the ECS cluster
+
+## Deployment
 
 ## Production setup
