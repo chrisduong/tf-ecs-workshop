@@ -36,7 +36,7 @@ docker run --rm -it -p 8080:8080  http-server:0.1.0
 - Terraform version `> 1.0'.
 - Community Terraform module [aws-ecs](https://registry.terraform.io/modules/terraform-aws-modules/ecs/aws/latest)
 
-### Create the ECS cluster
+### Deployment in ECS
 
 We will have multiple Workspaces. Each Workspace will match for a specific environment.
 
@@ -49,7 +49,5 @@ terraform workspace select dev
 terraform validate
 terraform apply -auto-approve
 ```
-
-## Deployment
 
 ## Production setup

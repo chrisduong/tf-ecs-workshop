@@ -81,6 +81,16 @@ data "aws_ami" "amazon_linux_ecs" {
   }
 
 }
+
+#----- ECS  Services--------
+module "http_server" {
+  source = "../http-server"
+
+  cluster_id  = module.ecs.ecs_cluster_id
+  app_version = var.app_version
+}
+
+#------ Auto Scaling Group ---------
 module "asg" {
   source  = "terraform-aws-modules/autoscaling/aws"
   version = "~> 4.0"
