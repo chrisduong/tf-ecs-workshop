@@ -38,6 +38,18 @@ docker run --rm -it -p 8080:8080  http-server:0.1.0
 
 ### Create the ECS cluster
 
+We will have multiple Workspaces. Each Workspace will match for a specific environment.
+
+For e.g. creating the `dev` environment:
+
+```sh
+cd terraform/deploy-ecs
+
+terraform workspace select dev
+terraform validate
+terraform apply -auto-approve
+```
+
 ## Deployment
 
 ## Production setup

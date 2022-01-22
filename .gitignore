@@ -1,3 +1,8 @@
 .local/
 
 outputs/
+
+## Terraform
+*.lock.hcl
+**/terraform.*
+**/.terraform/**
