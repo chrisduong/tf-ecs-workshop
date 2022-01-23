@@ -86,8 +86,12 @@ data "aws_ami" "amazon_linux_ecs" {
 module "http_server" {
   source = "../http-server"
 
-  cluster_id  = module.ecs.ecs_cluster_id
-  app_version = var.app_version
+  cluster_id       = module.ecs.ecs_cluster_id
+  app_version      = var.app_version
+  subnets          = module.vpc.private_subnets
+  security_groups  = [module.security_group.security_group_id]
+  target_group_arn = element(module.alb.target_group_arns, 0)
+
 }
 
 #------ Auto Scaling Group ---------

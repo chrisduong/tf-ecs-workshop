@@ -13,11 +13,11 @@ resource "aws_ecs_task_definition" "http_server" {
     "image": "chrisduong/http-server:${var.app_version}",
     "cpu": 0,
     "memory": 128,
-    portMappings = [
+    "portMappings": [
       {
-        containerPort = 8080
+        "containerPort": 8080
       }
-    ]
+    ],
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
@@ -40,4 +40,16 @@ resource "aws_ecs_service" "http_server" {
 
   deployment_maximum_percent         = 100
   deployment_minimum_healthy_percent = 0
+
+  network_configuration {
+    subnets         = var.subnets
+    security_groups = var.security_groups
+  }
+
+  load_balancer {
+    container_name   = "http_server"
+    container_port   = 8080
+    target_group_arn = var.target_group_arn
+  }
+
 }

@@ -8,3 +8,18 @@ variable "app_version" {
   type        = string
   default     = "0.1.0"
 }
+
+variable "subnets" {
+  description = "App version"
+  type        = list(string)
+}
+
+variable "security_groups" {
+  description = "App version"
+  type        = list(string)
+}
+
+variable "target_group_arn" {
+  description = "App version"
+  type        = string
+}
