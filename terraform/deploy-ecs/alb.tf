@@ -1,4 +1,4 @@
-module "security_group" {
+module "alb_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4.0"
 
@@ -21,7 +21,7 @@ module "alb" {
 
   vpc_id          = module.vpc.vpc_id
   subnets         = module.vpc.public_subnets
-  security_groups = [module.security_group.security_group_id]
+  security_groups = [module.alb_security_group.security_group_id]
 
   http_tcp_listeners = [
     {

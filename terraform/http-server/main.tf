@@ -38,8 +38,11 @@ EOF
 }
 
 resource "aws_ecs_service" "http_server" {
-  name            = "http_server"
-  cluster         = var.cluster_id
+  name                = "http_server"
+  cluster             = var.cluster_id
+  launch_type         = "FARGATE"
+  scheduling_strategy = "REPLICA"
+
   task_definition = aws_ecs_task_definition.http_server.arn
 
   desired_count = 1
@@ -56,6 +59,10 @@ resource "aws_ecs_service" "http_server" {
     container_name   = "http_server"
     container_port   = 8080
     target_group_arn = var.target_group_arn
+  }
+
+  lifecycle {
+    ignore_changes = [task_definition, desired_count]
   }
 
 }
