@@ -89,12 +89,17 @@ data "aws_ami" "amazon_linux_ecs" {
 
 #----- ECS  Services--------
 module "http_server" {
-  source = "../http-server"
+  source = "../modules/http-server"
 
   cluster_id       = module.ecs.ecs_cluster_id
-  app_version      = var.app_version
+  app_version      = module.vars.env.app_version
+  desired_count    = module.vars.env.ecs_desired_count
   subnets          = module.vpc.private_subnets
   security_groups  = [module.ecs_security_group.security_group_id]
   target_group_arn = element(module.alb.target_group_arns, 0)
+}
 
+module "vars" {
+  source      = "../modules/vars"
+  environment = terraform.workspace
 }

@@ -45,10 +45,10 @@ resource "aws_ecs_service" "http_server" {
 
   task_definition = aws_ecs_task_definition.http_server.arn
 
-  desired_count = 1
+  desired_count = var.desired_count
 
-  deployment_maximum_percent         = 100
-  deployment_minimum_healthy_percent = 0
+  deployment_maximum_percent         = var.deployment_maximum_percent # 100
+  deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
 
   network_configuration {
     subnets         = var.subnets
@@ -61,9 +61,9 @@ resource "aws_ecs_service" "http_server" {
     target_group_arn = var.target_group_arn
   }
 
-  lifecycle {
-    ignore_changes = [task_definition, desired_count]
-  }
+  # lifecycle {
+  #   ignore_changes = [desired_count]
+  # }
 
 }
 

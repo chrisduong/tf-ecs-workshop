@@ -35,12 +35,14 @@ docker run --rm -it -p 8080:8080  http-server:0.1.0
 
 - Terraform version `> 1.0'.
 - Community Terraform modules:
+  - [aws-vpc](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest)
   - [aws-ecs](https://registry.terraform.io/modules/terraform-aws-modules/ecs/aws/latest)
   - [aws-alb](https://registry.terraform.io/modules/terraform-aws-modules/alb/aws/latest)
 
 ### Secure connection with HTTPS
 
-Our ALB will force customer to use the HTTPS connection to our web server by redirect the HTTP traffic to HTTPS
+Our ALB will force customer to use the HTTPS connection to our web server by
+redirect the HTTP traffic to HTTPS.
 
 ```txt
 ❯ curl -IL http://web.example.com/version
@@ -71,5 +73,35 @@ terraform workspace select dev
 terraform validate
 terraform apply -auto-approve
 ```
+
+### DRY for Terraform
+
+When we have multiple environments to deploy and they use the same set of
+job functions (create the VPC, ECS cluster, ....). To avoid of repeating those
+jobs, we need to have a resuable solution for multiple environments.
+
+Once we define each job as a module, you can easily reuse it in different environments
+by sourcing the Terraform module.
+
+In this setup, we used a lot of modules:
+
+1. (App Level) we have VPC, ECS, ALB modules.
+2. (Environment Level) we have the [vars module](./terraform/modules/vars) which
+stores configurations for different environments (`app_version`,
+`deployment_minimum_healthy_percent`,...). We also evaluate the Terraform Workspace
+to avoid of repeating the module `deploy-ecs`.
+
+### Manual Scale
+
+You can increase (or reduce) the number of containers by setting the
+`ecs_desired_count` for your specific environment.
+SEE: [dev.tf/ecs_desired_count](./terraform/modules/vars/dev.tf#L4)
+
+### Rolling Update without downtime
+
+You set the `ecs_desired_count` greater than 1 and the `deployment_minimum_healthy_percent`
+at the right percent for you. For e.g. You can set `ecs_desired_count=2` and
+`deployment_minimum_healthy_percent=50`. Then during the deployment,
+you always have at least 1 containers running.
 
 ## Production setup
