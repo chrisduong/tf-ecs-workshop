@@ -126,3 +126,6 @@ the service.
   - Least privileged user
   - Fix security vulnerabilities inside the container
   - Use Your Own Private Registry
+- Need a solid Monitoring/Observability system so engineers can understand
+know whether ths applications is healthy and how
+to act on a specific issue ( Why is X broken?)
