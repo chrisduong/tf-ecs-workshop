@@ -25,25 +25,26 @@ module "alb" {
 
   http_tcp_listeners = [
     {
-      port     = 80
-      protocol = "HTTP"
-      # action_type = "redirect"
-      # redirect = {
-      #   port        = "443"
-      #   protocol    = "HTTPS"
-      #   status_code = "HTTP_301"
-      # }
+      port        = 80
+      protocol    = "HTTP"
+      action_type = "redirect"
+      redirect = {
+        port        = "443"
+        protocol    = "HTTPS"
+        status_code = "HTTP_301"
+      }
     }
   ]
 
-  # https_listeners = [
-  #   {
-  #     port               = 443
-  #     protocol           = "HTTPS"
-  #     certificate_arn    = module.acm.acm_certificate_arn
-  #     target_group_index = 1
-  #   },
-  # ]
+  https_listeners = [
+    {
+      port     = 443
+      protocol = "HTTPS"
+      // Use self-signed *.example.com for 18.158.223.254
+      // aws iam upload-server-certificate --server-certificate-name example.com  --certificate-body file://example.com+8.pem --private-key file://example.com+8-key.pem
+      certificate_arn = "arn:aws:iam::415376140508:server-certificate/example.com"
+    },
+  ]
 
   target_groups = [
     {

@@ -38,22 +38,24 @@ docker run --rm -it -p 8080:8080  http-server:0.1.0
   - [aws-ecs](https://registry.terraform.io/modules/terraform-aws-modules/ecs/aws/latest)
   - [aws-alb](https://registry.terraform.io/modules/terraform-aws-modules/alb/aws/latest)
 
-### Create the DNS first
+### Secure connection with HTTPS
 
-Register a domain (dev):
+Our ALB will force customer to use the HTTPS connection to our web server by redirect the HTTP traffic to HTTPS
 
-```sh
-aws route53domains register-domain \
-  --cli-input-json file://deploy/http-server-example-dev.engineering.json \
-  --region us-east-1
+```txt
+❯ curl -IL http://web.example.com/version
+HTTP/1.1 301 Moved Permanently
+Server: awselb/2.0
+Date: Tue, 25 Jan 2022 14:52:11 GMT
+Content-Type: text/html
+Content-Length: 134
+Connection: keep-alive
+Location: https://web.example.com:443/version
 
-# {
-#     "OperationId": "8753d80b-36a9-4a0c-9b94-281263c802de"
-# }
-```
-
-```sh
-terraform apply -target="module.zones" -auto-approve
+HTTP/2 200 
+date: Tue, 25 Jan 2022 14:52:12 GMT
+content-type: text/plain; charset=utf-8
+content-length: 6
 ```
 
 ### Deployment in ECS
