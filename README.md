@@ -104,4 +104,25 @@ at the right percent for you. For e.g. You can set `ecs_desired_count=2` and
 `deployment_minimum_healthy_percent=50`. Then during the deployment,
 you always have at least 1 containers running.
 
-## Production setup
+## Recommendations for Production Setup
+
+- We should have the AutoScaling system instead of "manual scale".
+SEE: [Service Auto Scale](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html)
+where you can confiure the Application AutoScaling target for your
+ECS service. Then you can for e.g. dynamically scale your service
+based on CPU or Memory usuage.
+- Service should be exposed with HTTPS.
+- Embrace the CI/CD, so that we can build, test and deploy at high velocity
+and in the more reliable way.
+- Embrace DevSecOps:
+  - Should have an Security Scanning system integrated with the CI,
+  to frequently scan the security vulnerability.
+  - To use the advanced security features for your exposed service
+such intrusion detection, consider to use Cloudflare to protect
+the service.
+- Follow container best practices:
+  - Prefer minimal base images
+  - Make container images complete and static
+  - Least privileged user
+  - Fix security vulnerabilities inside the container
+  - Use Your Own Private Registry
