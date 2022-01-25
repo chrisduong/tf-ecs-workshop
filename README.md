@@ -21,6 +21,7 @@ For e.g. to build the version `v0.1.0`:
 
 ```sh
 VERSION=v0.1.0 make build
+VERSION=v0.1.0 make docker
 ```
 
 Run the docker image locally:
