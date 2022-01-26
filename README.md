@@ -130,3 +130,16 @@ the service.
 - Need a solid Monitoring/Observability system so engineers can understand
 know whether ths applications is healthy and how
 to act on a specific issue ( Why is X broken?)
+
+### Terraform best practices
+
+- Code should be composable:
+  - Break down the problem into the smallest parts, and make it as a module.
+  - Hence code is DRY and more maintainable.
+- In the collaboration, to protect the consistency of the Terrafrom state. 
+  - We should use remote backend (S3)
+  - Lock the state file because there can be multiple scenarios where more than one developer tries to run the terraform configuration at the same time.
+  - Frequently backup the state
+  - Having the CI/CD tool for testing and appying the Infra changes.
+- Keep Terraform version up-to-date
+- Reduce the blast damage for Infra changes.
